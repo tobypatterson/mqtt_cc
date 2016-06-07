@@ -231,13 +231,16 @@ class Panel(BasePanel):
             pp = pprint.PrettyPrinter( indent=4 )
             self.messages.printstr(pp.pformat(msg))
 
-    @asyncio.coroutine
-    def terminate(self):
 
-        if not self.client or not self.client.is_connected():
-            return
+    def terminate(self):
 
         if self.topic:
             yield from self.client.unsubscribe(self.topic)
 
-        yield from self.client.disconnect()
+        if self.client and self.client.is_connected():
+            yield from self.client.disconnect()
+
+        yield from asyncio.sleep(4)
+
+
+

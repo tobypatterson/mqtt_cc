@@ -5,7 +5,6 @@ import sys
 
 import mqtt_cc.ui
 
-
 def _get_commandline_options():
     """
     Parse command line
@@ -31,8 +30,8 @@ def main():
     """ Script entry point """
     options = _get_commandline_options()
 
-    import clipy.ui
     mqtt_cc.ui.main(options.host)
 
 if __name__ == '__main__':
+
     main()
